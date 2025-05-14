@@ -1,0 +1,8 @@
+<div class="add-item">
+  <input
+    [(ngModel)]="item"
+    placeholder="Add an ingredient"
+    (keydown.enter)="addItem()"
+  />
+  <button (click)="addItem()">➕ Add</button>
+</div>

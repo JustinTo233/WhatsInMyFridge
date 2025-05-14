@@ -1,0 +1,135 @@
+<div class="home-container">
+  <div class="home-title">What's in My Fridge?</div>
+
+  <div class="home-layout">
+    <!-- Left Column: Notepad Style Ingredient Manager -->
+    <div class="ingredient-panel">
+      <app-add-item
+        (itemAdded)="onItemAdded($event)"
+        (clearedWarning)="clearWarningMessage()"
+      ></app-add-item>
+
+      <div class="button-group">
+        <button class="action-btn generate-btn" (click)="generateRecipes()">
+          🔍 Generate Recipes
+        </button>
+        <button class="action-btn clear-btn" (click)="clearIngredients()">
+          🗑️ Clear
+        </button>
+      </div>
+
+      <p *ngIf="warningMessage" class="warning-message">
+        {{ warningMessage }}
+      </p>
+
+      <div class="notepad-container">
+        <div class="notepad">
+          <h3>📝 Ingredients List</h3>
+          <app-ingredient-list
+            [items]="ingredients"
+            (itemsChange)="onItemsChange($event)"
+            (generateRecipesEvent)="generateRecipes()"
+          ></app-ingredient-list>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Recipe Grid -->
+    <div class="recipe-panel">
+      <div class="filter-toggle">
+        <div class="filter-controls">
+          <button (click)="toggleFilters()">
+            {{ showFilters ? "Hide Filters ▲" : "Show Filters ▼" }}
+          </button>
+
+          <div class="sort-section">
+            <label for="sort">Sort By:</label>
+            <select
+              [(ngModel)]="sortOption"
+              name="sort"
+              (change)="sortRecipes()"
+            >
+              <option value="">None</option>
+              <option value="title">Title (A-Z)</option>
+              <option value="readyInMinutes">Prep Time</option>
+              <option value="servings">Servings</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <section class="filter-section" *ngIf="showFilters">
+        <form (ngSubmit)="applyFilters()">
+          <div class="filter-group">
+            <label>Cuisine:</label>
+            <select [(ngModel)]="filters.cuisine" name="cuisine">
+              <option value="">Any</option>
+              <option *ngFor="let c of cuisines" [value]="c">{{ c }}</option>
+            </select>
+
+            <label>Dish Type:</label>
+            <select [(ngModel)]="filters.dishType" name="dishType">
+              <option value="">Any</option>
+              <option *ngFor="let d of dishTypes" [value]="d">{{ d }}</option>
+            </select>
+
+            <label>Vegetarian:</label>
+            <input
+              type="checkbox"
+              [(ngModel)]="filters.vegetarian"
+              name="vegetarian"
+            />
+
+            <label>Vegan:</label>
+            <input type="checkbox" [(ngModel)]="filters.vegan" name="vegan" />
+
+            <label>Gluten Free:</label>
+            <input
+              type="checkbox"
+              [(ngModel)]="filters.glutenFree"
+              name="glutenFree"
+            />
+          </div>
+
+          <div class="filter-group">
+            <label>Serving Size:</label>
+            <input
+              type="number"
+              [(ngModel)]="filters.servings"
+              name="servings"
+              min="1"
+            />
+
+            <label>Ready in (minutes):</label>
+            <input
+              type="number"
+              [(ngModel)]="filters.readyInMinutes"
+              name="readyInMinutes"
+              min="1"
+            />
+
+            <button type="submit">Apply Filters</button>
+            <button type="button" (click)="clearFilters()">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <div *ngIf="loading; else showRecipes" class="spinner-container">
+        <div class="loader">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <p *ngIf="!loading && recipes.length === 0">
+        No recipes match your filters.
+      </p>
+
+      <ng-template #showRecipes>
+        <app-recipe-suggestion [recipes]="recipes"></app-recipe-suggestion>
+      </ng-template>
+    </div>
+  </div>
+</div>

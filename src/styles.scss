@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark-mode {
+  --bg-color: #36454f;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.similar-recipe-link {
+  color: #4caf50;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px dashed #c8e6c9;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: #2e7d32;
+    border-bottom-style: solid;
+  }
+}

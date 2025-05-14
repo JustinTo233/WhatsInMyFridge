@@ -1,0 +1,86 @@
+<div class="back-button">
+  <button (click)="goBack()">
+    <span class="icon">🏠</span>
+    Back to Home
+  </button>
+</div>
+
+<div *ngIf="recipe" class="recipe-detail-container">
+  <h1 class="title">{{ recipe.title }}</h1>
+  <div class="image-wrapper">
+    <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image" />
+  </div>
+
+  <section class="info-grid">
+    <div class="info-card">
+      <div class="icon">⏱️</div>
+      <div class="label">Ready in</div>
+      <div class="value">{{ recipe.readyInMinutes }} minutes</div>
+    </div>
+    <div class="info-card">
+      <div class="icon">🍽️</div>
+      <div class="label">Servings</div>
+      <div class="value">{{ recipe.servings }}</div>
+    </div>
+    <div class="info-card" *ngIf="recipe.sourceName">
+      <div class="icon">👨‍🍳</div>
+      <div class="label">Credits</div>
+      <div class="value">{{ recipe.sourceName }}</div>
+    </div>
+    <div class="info-card" *ngIf="recipe.cuisines.length">
+      <div class="icon">🌍</div>
+      <div class="label">Cuisine</div>
+      <div class="value">{{ recipe.cuisines.join(", ") }}</div>
+    </div>
+    <div class="info-card" *ngIf="recipe.dishTypes.length">
+      <div class="icon">🍲</div>
+      <div class="label">Dish Type</div>
+      <div class="value">{{ recipe.dishTypes.join(", ") | titlecase }}</div>
+    </div>
+    <div class="info-card">
+      <div class="icon">🥗</div>
+      <div class="label">Vegetarian</div>
+      <div class="value">{{ recipe.vegetarian ? "Yes" : "No" }}</div>
+    </div>
+    <div class="info-card">
+      <div class="icon">🌿</div>
+      <div class="label">Vegan</div>
+      <div class="value">{{ recipe.vegan ? "Yes" : "No" }}</div>
+    </div>
+    <div class="info-card">
+      <div class="icon">🚫🌾</div>
+      <div class="label">Gluten Free</div>
+      <div class="value">{{ recipe.glutenFree ? "Yes" : "No" }}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h3>Summary</h3>
+    <div
+      class="summary"
+      [innerHTML]="getSanitizedSummary(recipe.summary)"
+    ></div>
+  </section>
+
+  <section class="section">
+    <h3>🧂 Ingredients</h3>
+    <ul class="ingredient-list">
+      <li *ngFor="let ingredient of recipe.extendedIngredients">
+        {{ ingredient.original }}
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" *ngIf="instructionSteps.length">
+    <h3>Instructions</h3>
+    <ol class="instruction-list">
+      <li *ngFor="let step of instructionSteps">{{ step }}</li>
+    </ol>
+  </section>
+
+  <div class="source-link" *ngIf="recipe?.sourceUrl">
+    <a [href]="recipe.sourceUrl" target="_blank" rel="noopener">
+      🔗 View Full Recipe Source
+    </a>
+  </div>
+</div>

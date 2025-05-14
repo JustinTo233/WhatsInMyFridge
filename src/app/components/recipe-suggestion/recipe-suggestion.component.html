@@ -1,0 +1,15 @@
+<div class="recipe-suggestions" *ngIf="recipes.length > 0">
+  <div
+    *ngFor="let recipe of recipes"
+    class="recipe-card"
+    [routerLink]="['/recipe', recipe.id]"
+  >
+    <div class="recipe-title">{{ recipe.title }}</div>
+
+    <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image" />
+    <div class="recipe-meta">
+      <span>⏱️ {{ recipe.readyInMinutes }} min</span>
+      <span>🍽️ {{ recipe.servings }} servings</span>
+    </div>
+  </div>
+</div>

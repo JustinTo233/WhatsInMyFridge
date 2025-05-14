@@ -1,0 +1,8 @@
+<div class="ingredient-list">
+  <ul class="ingredients">
+    <li *ngFor="let item of items; let i = index" class="ingredient">
+      {{ item }}
+      <button (click)="removeItem(i)" class="remove-btn">&times;</button>
+    </li>
+  </ul>
+</div>
