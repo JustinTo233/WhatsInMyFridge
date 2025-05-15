@@ -88,7 +88,10 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://justinto233.github.io/WhatsInMyFridge/"
+          }
         }
       }
     }
