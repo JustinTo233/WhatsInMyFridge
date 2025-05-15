@@ -58,7 +58,10 @@
         </div>
       </div>
 
-      <section class="filter-section" *ngIf="showFilters">
+      <section
+        class="filter-section"
+        [@slideInOut]="showFilters ? 'in' : 'out'"
+      >
         <form (ngSubmit)="applyFilters()">
           <div class="filter-group">
             <label>Cuisine:</label>

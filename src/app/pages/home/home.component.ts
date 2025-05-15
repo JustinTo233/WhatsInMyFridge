@@ -6,6 +6,13 @@ import { IngredientListComponent } from '../../components/ingredient-list/ingred
 import { RecipeSuggestionComponent } from '../../components/recipe-suggestion/recipe-suggestion.component';
 import { RecipeAPIService } from '../../services/recipe-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +26,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'in',
+        style({
+          height: '*',
+          opacity: 1,
+          padding: '1rem 2rem',
+          marginBottom: '2rem',
+        })
+      ),
+      state(
+        'out',
+        style({
+          height: '0px',
+          opacity: 0,
+          padding: '0 2rem',
+          marginBottom: '0',
+          overflow: 'hidden',
+        })
+      ),
+      transition('in <=> out', animate('300ms ease-in-out')),
+    ]),
+  ],
 })
 export class HomeComponent {
   ingredients: string[] = [];

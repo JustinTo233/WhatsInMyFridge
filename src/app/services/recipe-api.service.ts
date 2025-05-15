@@ -41,8 +41,7 @@ export class RecipeAPIService {
     if (filters.vegetarian) params.vegetarian = true;
     if (filters.vegan) params.vegan = true;
     if (filters.glutenFree) params.glutenFree = true;
-    if (filters.readyInMinutes)
-      params.maxReadyTime = filters.readyInMinutes;
+    if (filters.readyInMinutes) params.maxReadyTime = filters.readyInMinutes;
     if (filters.servings) params.maxServings = filters.servings;
 
     return this.http.get(`${this.apiUrl}/recipes/complexSearch`, { params });
