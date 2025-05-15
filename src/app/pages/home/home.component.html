@@ -123,9 +123,14 @@
         </div>
       </div>
 
-      <p *ngIf="!loading && recipes.length === 0">
-        No recipes match your filters.
-      </p>
+      <div *ngIf="!loading && recipes.length === 0" class="no-recipes-message">
+        <img
+          src="empty-fridge.png"
+          alt="Empty Fridge"
+          class="no-recipes-image"
+        />
+        <p>No recipes match your current filters. Try adjusting them!</p>
+      </div>
 
       <ng-template #showRecipes>
         <app-recipe-suggestion [recipes]="recipes"></app-recipe-suggestion>

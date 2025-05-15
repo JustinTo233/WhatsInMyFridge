@@ -213,6 +213,36 @@
   background-color: #4a5760;
 }
 
+.no-recipes-message {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff9f9;
+  border: 2px dashed #ff7675;
+  border-radius: 12px;
+  color: #d63031;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.no-recipes-message p {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.no-recipes-image {
+  width: 150px;
+  height: auto;
+  opacity: 0.75;
+}
+
+:host-context(body.dark-mode) .no-recipes-message {
+  background-color: #fff9f9;
+  border: 2px dashed #ff7675;
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -279,4 +309,8 @@
   100% {
     transform: scale(1) rotate(360deg);
   }
+}
+
+:host-context(body.dark-mode) .loader .circle {
+  --color: #c1c1c1;
 }
